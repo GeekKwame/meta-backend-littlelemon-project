@@ -1,73 +1,69 @@
+# Little Lemon Restaurant - Backend System 🍋
 
-Accessible only in development.
-
----
-
-## 📦 Features
-
-### ✅ Public Pages
-- **Home Page** (`/`)  
-  Static landing page (`index.html`) with branding or basic info.
-
-- **About Page** (`/about`)  
-  Static description about the Little Lemon restaurant.
-
-### 🍽️ Menu Pages
-- **Menu Listing** (`/menu`)  
-  Displays all menu items from the database.
-
-- **Single Menu Item View** (`/menu_item/<id>`)  
-  View individual menu item details.
-
-### 📆 Booking System
-- **Booking Form** (`/book`)  
-  A form allowing users to submit reservation requests.
-
-- **Booking Display** (`/reservations?date=YYYY-MM-DD`)  
-  Shows existing bookings for a selected date, as JSON embedded in the page.
-
-- **API Booking Endpoint** (`/bookings`)  
-  Accepts `POST` requests with JSON to create new reservations (CSRF exempt).  
-  Also returns all bookings for a specific date in JSON format on `GET`.
+**Status**: Development (Accessible only in development mode)  
+**Disclaimer**: This project is part of the [Meta Back-End Developer Professional Certificate](https://www.coursera.org/professional-certificates/meta-back-end-developer) on Coursera. All rights belong to Meta Platforms, Inc. This repository is for educational/portfolio purposes only.
 
 ---
 
-## ⚙️ Technologies Used
+## 🌟 Key Features
 
-- Python 3.11+
-- Django 4.x
-- SQLite (default Django DB)
-- HTML (Template rendering)
-- JSON (for bookings API)
-- Bootstrap (optional frontend styling, if used)
+### 📍 Public Pages
+| Page          | URL          | Template       | Description                                  |
+|---------------|--------------|----------------|----------------------------------------------|
+| **Home**      | `/`          | `index.html`   | Landing page with branding and key info.     |
+| **About**     | `/about`     | `about.html`   | Restaurant story, team, and mission.         |
+
+### 🍽️ Menu System
+| Feature               | URL Pattern            | Template         | Description                                |
+|-----------------------|------------------------|------------------|--------------------------------------------|
+| Full Menu            | `/menu`                | `menu.html`      | Paginated list of all menu items.          |
+| Single Item Details  | `/menu_item/<int:id>`  | `menu_item.html` | Detailed view (price, description, etc.). |
+
+### 📅 Booking System
+| Feature               | URL/Endpoint           | Method | Data Format | Description                                |
+|-----------------------|------------------------|--------|-------------|--------------------------------------------|
+| Booking Form         | `/book`                | GET    | HTML        | User-facing reservation form.              |
+| View Reservations    | `/reservations?date=`  | GET    | HTML+JSON   | Embedded JSON of bookings for a date.      |
+| **API Endpoint**     | `/bookings`            | POST   | JSON        | Submit new reservations (CSRF exempt).     |
+|                       | `/bookings?date=`      | GET    | JSON        | Retrieve bookings for a specific date.     |
 
 ---
 
-## 🗂️ Project Structure (Views Overview)
+## ⚙️ Tech Stack
 
-| View Function         | URL Pattern              | Template               | Description                         |
-|----------------------|--------------------------|------------------------|-------------------------------------|
-| `home()`             | `/`                      | `index.html`           | Landing page                        |
-| `about()`            | `/about`                 | `about.html`           | About Little Lemon                  |
-| `menu()`             | `/menu`                  | `menu.html`            | List of menu items                  |
-| `display_menu_item()`| `/menu_item/<id>`        | `menu_item.html`       | Detail view of a menu item          |
-| `book()`             | `/book`                  | `book.html`            | Reservation form                    |
-| `reservations()`     | `/reservations?date=`    | `bookings.html`        | Shows reservations on that date     |
-| `bookings()`         | `/bookings` (POST/GET)   | API only               | JSON booking API                    |
+### Backend
+- **Python 3.11+**
+- **Django 4.x** (MVT architecture)
+- **SQLite** (Default database)
+
+### Frontend
+- **HTML Templates** (Django templating engine)
+- **Bootstrap 5** (Responsive styling - optional)
+- **JSON API** (For booking system integration)
+
+### Development Tools
+- Django Admin Panel (For data management)
+- SQLite Browser (For DB inspection)
 
 ---
 
-## 🧪 API Usage
+## 🛠️ Installation & Setup
 
-### POST: `/bookings`
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/little-lemon-django.git
+cd little-lemon-django
 
-```json
-{
-  "first_name": "Edmund",
-  "reservation_date": "2025-08-06",
-  "reservation_slot": "18:00"
-}
+# 2. Set up virtual environment (Recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate  # Windows
 
-## Disclaimer
-This project is part of a course assignment from the Meta Back-End Developer Professional Certificate on Coursera. All rights belong to Meta Platforms, Inc. This repository is for educational and portfolio purposes only.
+# 3. Install dependencies
+pip install -r requirements.txt
 
+# 4. Run migrations
+python manage.py migrate
+
+# 5. Start development server
+python manage.py runserver
